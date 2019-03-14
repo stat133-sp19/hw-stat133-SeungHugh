@@ -1,0 +1,108 @@
+---
+title: "workout01-SeungHugh-Jeong"
+author: "SeungHugh Jeong"
+date: '2019 3 10 '
+output: github_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(dplyr)
+total <- read.csv("../data/shots-data.csv", stringsAsFactors = FALSE)
+shoot <- total[, c('name', 'shot_type', 'shot_made_flag')]
+shoot$shot_type[shoot$shot_type == '2PT Field Goal'] <- 2
+shoot$shot_type[shoot$shot_type == '3PT Field Goal'] <- 3
+shoot$shot_made_flag[shoot$shot_made_flag == 'shot_yes'] <- 1
+shoot$shot_made_flag[shoot$shot_made_flag == 'shot_no'] <- 0
+shoot$shot_type <- as.numeric(shoot$shot_type)
+shoot$shot_made_flag <- as.numeric(shoot$shot_made_flag)
+shoot$shot_made <- shoot$shot_type * shoot$shot_made_flag
+shoot <- shoot[, -3]
+
+pt2 <- shoot[shoot$shot_type == 2, ]
+pt3 <- shoot[shoot$shot_type == 3, ]
+
+pt2 <- summarise(group_by(pt2, name), total = sum(shot_type), made = sum(shot_made))
+pt2$perc_made <- 100 * pt2$made / pt2$total
+pt2 <- arrange(pt2, desc(perc_made))
+
+pt3 <- summarise(group_by(pt3, name), total = sum(shot_type), made = sum(shot_made))
+pt3$perc_made <- 100 * pt3$made / pt3$total
+pt3 <- arrange(pt3, desc(perc_made))
+
+overall <- summarise(group_by(shoot, name), total = sum(shot_type), made = sum(shot_made))
+overall$perc_made <- 100 * overall$made / overall$total
+overall <- arrange(overall, desc(perc_made))
+```
+
+
+### Shot Data of 5 NBA players in Golden State Warriors
+  It is common things that judging NBA players (or even other sports) on very vague criteria, rahter than this player on what they are good at. Or just refer tables which can be shown by searching online and simply check them with only numerical records not with viualization them, and go on to "Oh, this is it". Of course, it may be enough with simply the above data for those who are familiar with or havae been interested in basketball for a long time, but including me, it has no meaning for those who cannot understand or don't know anything about it. So, in this article, five NBA players (especially the Golden State Warriors) were analyzed and visualized.
+  
+***
+
+```{r, echo=FALSE}
+head(total)
+```
+The table above extracted the first six lines of the raw data. The number of rows in this table is 4,344 lines, and the number of columns is 16. If it is possible to extract the information reader can get from the data and look at this ridiculous amount of data, focus at once, then he (or she) is definitely a genius. So, let's organize the data from now on, with the raw data being unknown.
+
+---
+
+```{r, echo=FALSE}
+colnames(total)
+```
+The above list is the column titles of the original data. What is required is ('name': name of the players, 'shot_made_flag': the success or failure of the shooting, 'x', 'y': the location where the show was attempted). Now let's look at the chart below, with the columns which are selected.
+
+\newline
+&nbsp;
+&nbsp;
+&nbsp;
+\  
+\  
+\  
+
+---
+
+> Visualization
+
+Below are charts of the shooting positions and success/failure of the five players in half-court.
+```{r out.width='80%', echo=FALSE, fig.align='center'}
+knitr::include_graphics("../images/gsw-shot-charts.png")
+```
+What can be understood at once, compared to the above chart and the first six-line data extracted? Of course, it's a visualized chart. But, there are a few problems here. There are so many shooting numbers which can be seen a lot of dots on the above each chart with half-court image. And there are also ambiguities to tell which shoot is a two-pointer and which shot is a three-pointer. Lastly, it's also hard to tell which player scored more in the comparison between the five players. So, let's have a rough understanding with the chart above, and separately analyze the data in a little more detail.
+
+---
+
+> Comparison
+
+Now to compare the score points between the players, let's pick from the columns which first identified ('name': player's name, 'shot_type': point of the shot, 'shot_made_flag': success or failure of the shot).
+Below is a table showing the success or failure of the 2-point shot and the success rate (%) determined by the columns picked.
+```{r, echo=FALSE}
+writeLines("2PT Effective Shooting % by Player")
+pt2
+```
+At this 2-point table, Andre Iguodala's sucess rate of 63.8%, widening tha gap between Draymond Green and more than 14%, showing a fairly high gap even though he has loweset number of shooting trial among them.
+
+---
+
+
+Below is a table showing the success or failure of the 3-point shot and the success rate (%) determined by the columns picked.
+```{r, echo=FALSE}
+writeLines("3PT Effective Shooting % by Player")
+pt3
+```
+At this 3-point table, Draymond Green is also the lowest with 31.9% success rate, but Andre Iguodala is also only last with 36% success rate. And it's the highest success rate of Klay Thompson, but his success rate is 42.4%, lower than the 49.4% of the Draymond Green with the lowest success rate in the 2-point table. That is, a 3-point shot can be seen to have a definitely higher level of difficulty than a 2-point shot.
+
+---
+
+This time, let's take a look at the total score table, which combines the two tables.
+```{r, echo=FALSE}
+writeLines("Effective Shooting % by Player")
+overall
+```
+Draymond Green, who came in last at both tables, is of course the lowest at the total score table. And all four other players, except Kevin Durant, have not exceeded the 50% success rate.
+
+---
+
+> Conclusion
+
+Visualization of the data showed to get a good idea at once. Which player tried many times, how successful and so on. And for detailed information, set and created tables for each 2-point, 3-point, total. Through those three tables, it was possible to analyze the data for comparison between five players, who did well and had more trials and so on. As a result, Kevin Durant has highest success rate of overall shooting even it's higher than 50%, and in 3-point shoot, Klay Thompson has highest one and 2nd highest shooting trial. Thus Overall, it's Durant, but Thompson stands out at three-point distance.
