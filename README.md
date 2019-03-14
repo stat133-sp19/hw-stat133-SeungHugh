@@ -3,7 +3,7 @@
 Private Repository for HW assignments of Stat 133 (Spring 2019)
 
 - Name: SeungHugh Jeong
-- Github username: SeungHugh Jeong
+- Github username: SeungHugh
 - Email: hugh320@berkeley.edu
 - Lab section: 112
 - GSI: Shuni Li
