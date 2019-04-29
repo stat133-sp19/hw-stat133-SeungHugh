@@ -3,7 +3,7 @@ Type: Package
 Title: Binomial functions
 Version: 0.1.0
 Author@R: person("SeungHugh", "Jeong", email = "hugh320@berkeley.edu")
-Description: package of binomial functions
+Description: package of functions for binomial distribution
 License: Stat 133, UC Berkeley
 Encoding: UTF-8
 LazyData: true
