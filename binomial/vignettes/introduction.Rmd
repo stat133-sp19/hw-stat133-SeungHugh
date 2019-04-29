@@ -1,0 +1,102 @@
+---
+title: "How to use binomial functions"
+author: "SeungHugh Jeong"
+date: '2019 4 29 '
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to binomial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(binomial)
+```
+
+## Binomial
+
+The package "binomial" is a set of functions about binomial distribution calculation, and to visualize the binomial distribution table
+
+
+## Basic calculation about binomial distribution
+
+Get E(X) where X ~ B(n, p)
+```{r}
+bin_E <- bin_mean(trials = 100, prob = 0.5)
+bin_E
+```
+
+Get Var(X) where X ~ B(n, p)
+```{r}
+bin_V <- bin_variance(trials = 100, prob = 0.5)
+bin_V
+```
+
+Get Mode of X where X ~ B(n, p)
+```{r}
+bin_M <- bin_mode(trials = 100, prob = 0.5)
+bin_M
+```
+
+Get skewness of X where X ~ B(n, p)
+```{r}
+bin_S <- bin_skewness(trials = 100, prob = 0.3)
+bin_S
+```
+
+Get Kurt(X) where X ~ B(n, p)
+```{r}
+bin_K <- bin_kurtosis(trials = 100, prob = 0.3)
+bin_K
+```
+
+Get \binom(n,k)
+```{r}
+bin_C <- bin_choose(n = 10, k = 3)
+bin_C
+```
+
+Get $P(X = k)$ for binomial
+```{r}
+bin_P <- bin_probability(success = 3, trials = 10, prob = 0.3)
+bin_P
+```
+
+
+## Integrate first 5 functions
+
+Get summary of binomial functions
+```{r}
+bin1 <- bin_variable(trials = 10, prob = 0.3)
+bin1
+summary(bin1)
+```
+
+
+## Table of Binomial Distribution
+
+Get binomial distribution
+```{r}
+dis1 <- bin_distribution(trials = 5, prob = 0.5)
+dis1
+```
+
+Get binomial distribution with additional cumulative probability column
+```{r}
+dis2 <- bin_cumulative(trials = 5, prob = 0.5)
+dis2
+```
+
+
+## Plot of Binomial Distribution
+
+Get histogram of a binomial distribution
+```{r}
+plot(dis1)
+```
+
+Get graph of a cumulative distribution
+```{r}
+plot(dis2)
+```
