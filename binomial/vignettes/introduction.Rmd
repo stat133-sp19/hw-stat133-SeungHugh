@@ -51,7 +51,7 @@ bin_K <- bin_kurtosis(trials = 100, prob = 0.3)
 bin_K
 ```
 
-Get \binom(n,k)
+Get $\binom n k$
 ```{r}
 bin_C <- bin_choose(n = 10, k = 3)
 bin_C
