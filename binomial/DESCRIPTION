@@ -4,7 +4,7 @@ Title: Binomial functions
 Version: 0.1.0
 Author@R: person("SeungHugh", "Jeong", email = "hugh320@berkeley.edu")
 Description: package of functions for binomial distribution
-License: Stat 133, UC Berkeley
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Collate:
