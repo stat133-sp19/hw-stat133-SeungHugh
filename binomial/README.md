@@ -1,7 +1,7 @@
 Binomial Package which includes functions about binomial distribution.
 
-  - bin_choose(n, k) : n choose k
-  - bin_probability(success, trials, prob) : P(X = success)
+  - bin_choose(n, k) : $\binom n k$ n choose k
+  - bin_probability(success, trials, prob) : $P(X = success)$ where $X~B(trials, prob)$
   - bin_distribution(trials, prob) : binomial distribution table
   - bin_cumulative(trials, prob) : additional column with cumulative probability of binomial ditribution table
   
