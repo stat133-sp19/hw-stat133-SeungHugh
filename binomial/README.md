@@ -1,4 +1,4 @@
-Binomial Packages which includes functions about binomials.
+Binomial Package which includes functions about binomial distribution.
 
   - bin_choose(n, k) : n choose k
   - bin_probability(success, trials, prob) : P(X = success)
